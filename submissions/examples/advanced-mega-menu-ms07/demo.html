@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Mega Menu Navigation — Demo</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <p class="megamenu-demo-hint">Click "Products" or "Resources" to open the mega menu. On narrow screens, tap the hamburger icon, then tap a section title to expand it.</p>
+
+  <header class="megamenu-bar">
+
+    <a class="megamenu-logo" href="#">
+      <span class="megamenu-logo-mark">EM</span>
+      EaseMotion
+    </a>
+
+    <button class="megamenu-mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="megamenu-nav" id="megamenuNav">
+
+      <!-- Top-level item with mega panel: Products -->
+      <div class="megamenu-item" data-menu="products">
+        <button class="megamenu-trigger" aria-expanded="false">
+          Products
+          <svg class="megamenu-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="megamenu-panel">
+          <div class="megamenu-panel-inner">
+
+            <div class="megamenu-col">
+              <h3 class="megamenu-col-title">Platform</h3>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-route">▱</span>
+                <span class="megamenu-link-text">
+                  Live Tracking
+                  <small>Real-time GPS &amp; route polylines</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-bolt">⚡</span>
+                <span class="megamenu-link-text">
+                  Automations
+                  <small>Trigger-based workflow rules</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-grid">▦</span>
+                <span class="megamenu-link-text">
+                  Dashboards
+                  <small>Operational reporting views</small>
+                  <span class="megamenu-badge megamenu-badge-new">New</span>
+                </span>
+              </a>
+            </div>
+
+            <div class="megamenu-col">
+              <h3 class="megamenu-col-title">Fleet Tools</h3>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-truck">▭</span>
+                <span class="megamenu-link-text">
+                  Vehicle Diagnostics
+                  <small>Health checks &amp; alerts</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-doc">▤</span>
+                <span class="megamenu-link-text">
+                  Document Vault
+                  <small>Compliance &amp; paperwork</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-chat">◔</span>
+                <span class="megamenu-link-text">
+                  Driver Messaging
+                  <small>In-app dispatch chat</small>
+                  <span class="megamenu-badge megamenu-badge-beta">Beta</span>
+                </span>
+              </a>
+            </div>
+
+            <div class="megamenu-col">
+              <h3 class="megamenu-col-title">Integrations</h3>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-plug">◈</span>
+                <span class="megamenu-link-text">
+                  API &amp; Webhooks
+                  <small>Build on top of the platform</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-map">◫</span>
+                <span class="megamenu-link-text">
+                  OSRM Routing
+                  <small>Self-hosted route engine</small>
+                </span>
+              </a>
+            </div>
+
+            <div class="megamenu-feature-card">
+              <span class="megamenu-feature-eyebrow">Featured</span>
+              <h4 class="megamenu-feature-title">What's new in v2.4</h4>
+              <p class="megamenu-feature-copy">30-second live refresh, smarter cache-key precision, and a redesigned diagnostics panel.</p>
+              <a class="megamenu-feature-cta" href="#">
+                Read the changelog
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5H11M11 5L7 1M11 5L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Top-level item with mega panel: Resources -->
+      <div class="megamenu-item" data-menu="resources">
+        <button class="megamenu-trigger" aria-expanded="false">
+          Resources
+          <svg class="megamenu-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="megamenu-panel megamenu-panel-narrow">
+          <div class="megamenu-panel-inner megamenu-panel-inner-2col">
+
+            <div class="megamenu-col">
+              <h3 class="megamenu-col-title">Learn</h3>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-book">▥</span>
+                <span class="megamenu-link-text">
+                  Documentation
+                  <small>Guides &amp; API reference</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-play">▶</span>
+                <span class="megamenu-link-text">
+                  Video Tutorials
+                  <small>Step-by-step walkthroughs</small>
+                </span>
+              </a>
+            </div>
+
+            <div class="megamenu-col">
+              <h3 class="megamenu-col-title">Community</h3>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-discord">◉</span>
+                <span class="megamenu-link-text">
+                  Discord Server
+                  <small>Chat with other builders</small>
+                </span>
+              </a>
+              <a class="megamenu-link" href="#">
+                <span class="megamenu-link-icon megamenu-icon-star">★</span>
+                <span class="megamenu-link-text">
+                  Showcase
+                  <small>Community-built demos</small>
+                </span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Plain links: no mega panel -->
+      <a class="megamenu-plain-link" href="#">Pricing</a>
+      <a class="megamenu-plain-link" href="#">Changelog</a>
+
+      <a class="megamenu-cta-button" href="#">Get Started</a>
+
+    </nav>
+  </header>
+
+  <main class="megamenu-demo-spacer">
+    <p>Page content area — open the menu above to see the panel overlay it.</p>
+  </main>
+
+  <script>
+    (function () {
+      const items = Array.from(document.querySelectorAll('.megamenu-item'));
+      const mobileToggle = document.getElementById('mobileToggle');
+      const nav = document.getElementById('megamenuNav');
+
+      function closeAll(except) {
+        items.forEach((item) => {
+          if (item === except) return;
+          item.classList.remove('megamenu-item-open');
+          item.querySelector('.megamenu-trigger').setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      items.forEach((item) => {
+        const trigger = item.querySelector('.megamenu-trigger');
+
+        trigger.addEventListener('click', () => {
+          const isOpen = item.classList.contains('megamenu-item-open');
+          closeAll(item);
+          item.classList.toggle('megamenu-item-open', !isOpen);
+          trigger.setAttribute('aria-expanded', String(!isOpen));
+        });
+      });
+
+      // Close panels when clicking outside, or pressing Escape
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.megamenu-item')) {
+          closeAll(null);
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAll(null);
+      });
+
+      // Mobile hamburger toggle
+      mobileToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('megamenu-nav-open');
+        mobileToggle.setAttribute('aria-expanded', String(isOpen));
+        mobileToggle.classList.toggle('megamenu-mobile-toggle-active', isOpen);
+        if (!isOpen) closeAll(null);
+      });
+
+      // On mobile, panels behave as inline accordions rather than overlay popovers.
+      // The same click handler above already toggles `.megamenu-item-open`,
+      // and the CSS adapts the panel's display mode at the mobile breakpoint.
+    })();
+  </script>
+
+</body>
+</html>

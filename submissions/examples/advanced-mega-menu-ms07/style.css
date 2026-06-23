@@ -1,0 +1,473 @@
+/* ===================================================================
+   Advanced Mega Menu Navigation — raw demo styles
+   Class names are unprefixed on purpose; the maintainer will rename
+   everything to the ease-* convention during integration.
+   =================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0b0f19;
+  color: #e7e9ee;
+}
+
+.megamenu-demo-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8b93a7;
+  padding: 14px 20px 0;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------
+   Top bar
+   --------------------------------------------------------------- */
+
+.megamenu-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 16px 28px;
+  background: #11162280;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #ffffff14;
+  z-index: 50;
+}
+
+.megamenu-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #f3f4f7;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.megamenu-logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #6c63ff, #38bdf8);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------
+   Nav row + top-level items
+   --------------------------------------------------------------- */
+
+.megamenu-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.megamenu-item {
+  position: relative;
+}
+
+.megamenu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  color: #cbd1e0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.megamenu-trigger:hover {
+  background: #ffffff0d;
+  color: #fff;
+}
+
+.megamenu-item-open .megamenu-trigger {
+  background: #ffffff14;
+  color: #fff;
+}
+
+.megamenu-chevron {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.megamenu-item-open .megamenu-chevron {
+  transform: rotate(180deg);
+}
+
+.megamenu-plain-link {
+  color: #cbd1e0;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.megamenu-plain-link:hover {
+  background: #ffffff0d;
+  color: #fff;
+}
+
+.megamenu-cta-button {
+  margin-left: auto;
+  background: linear-gradient(135deg, #6c63ff, #8b7bff);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.megamenu-cta-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -8px #6c63ffaa;
+}
+
+/* ---------------------------------------------------------------
+   Mega panel — overlay style with fade + scale + slide
+   --------------------------------------------------------------- */
+
+.megamenu-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translate(-50%, -8px) scale(0.97);
+  width: min(720px, 92vw);
+  background: #161b29;
+  border: 1px solid #ffffff14;
+  border-radius: 16px;
+  box-shadow: 0 24px 48px -16px #00000080;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.22s;
+  z-index: 40;
+}
+
+.megamenu-panel-narrow {
+  width: min(420px, 92vw);
+}
+
+.megamenu-item-open .megamenu-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.megamenu-panel-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.1fr;
+  gap: 28px;
+  padding: 28px;
+}
+
+.megamenu-panel-inner-2col {
+  grid-template-columns: 1fr 1fr;
+}
+
+.megamenu-col-title {
+  margin: 0 0 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b7390;
+}
+
+.megamenu-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-decoration: none;
+  color: #cbd1e0;
+  padding: 8px 8px;
+  margin: 0 -8px;
+  border-radius: 10px;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+
+.megamenu-link:hover {
+  background: #ffffff0d;
+  transform: translateX(2px);
+}
+
+.megamenu-link-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #ffffff0f;
+  color: #aeb4c4;
+  font-size: 0.85rem;
+  margin-top: 1px;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+/* Per-icon accent colors — tint the icon chip for visual variety */
+.megamenu-icon-route   { color: #38bdf8; }
+.megamenu-icon-bolt    { color: #fbbf24; }
+.megamenu-icon-grid    { color: #a78bfa; }
+.megamenu-icon-truck   { color: #f472b6; }
+.megamenu-icon-doc     { color: #4ade80; }
+.megamenu-icon-chat    { color: #fb923c; }
+.megamenu-icon-plug    { color: #60a5fa; }
+.megamenu-icon-map     { color: #34d399; }
+.megamenu-icon-book    { color: #818cf8; }
+.megamenu-icon-play    { color: #f87171; }
+.megamenu-icon-discord { color: #a5b4fc; }
+.megamenu-icon-star    { color: #fbbf24; }
+
+.megamenu-link:hover .megamenu-link-icon {
+  background: #ffffff1c;
+}
+
+.megamenu-link-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f0f1f5;
+  gap: 2px;
+}
+
+.megamenu-link-text small {
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: #8b93a7;
+}
+
+.megamenu-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.megamenu-badge-new {
+  background: #22c55e22;
+  color: #4ade80;
+}
+
+.megamenu-badge-beta {
+  background: #f59e0b22;
+  color: #fbbf24;
+}
+
+/* ---------------------------------------------------------------
+   Featured promo card inside the panel
+   --------------------------------------------------------------- */
+
+.megamenu-feature-card {
+  background: linear-gradient(160deg, #6c63ff22, #38bdf81a);
+  border: 1px solid #ffffff14;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.megamenu-feature-eyebrow {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.megamenu-feature-title {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.megamenu-feature-copy {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #aeb4c4;
+}
+
+.megamenu-feature-cta {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #93c5fd;
+  text-decoration: none;
+  transition: gap 0.16s ease;
+}
+
+.megamenu-feature-cta:hover {
+  gap: 10px;
+}
+
+/* ---------------------------------------------------------------
+   Mobile hamburger toggle (hidden on desktop)
+   --------------------------------------------------------------- */
+
+.megamenu-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.megamenu-mobile-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #e7e9ee;
+  border-radius: 2px;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.megamenu-mobile-toggle-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.megamenu-mobile-toggle-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.megamenu-mobile-toggle-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.megamenu-demo-spacer {
+  padding: 80px 28px;
+  color: #6b7390;
+  font-size: 0.9rem;
+}
+
+/* ===================================================================
+   Responsive behavior
+   Below 860px: nav collapses into a slide-down panel, mega panels
+   become inline accordions instead of floating overlays.
+   =================================================================== */
+
+@media (max-width: 860px) {
+
+  .megamenu-mobile-toggle {
+    display: flex;
+  }
+
+  .megamenu-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    background: #111622;
+    border-bottom: 1px solid #ffffff14;
+    padding: 10px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  }
+
+  .megamenu-nav-open {
+    max-height: 80vh;
+    opacity: 1;
+    overflow-y: auto;
+  }
+
+  .megamenu-trigger,
+  .megamenu-plain-link {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .megamenu-cta-button {
+    margin: 8px 4px 4px;
+    text-align: center;
+  }
+
+  /* Mega panel becomes an inline accordion instead of a floating popover */
+  .megamenu-panel {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: none;
+    border-radius: 10px;
+    margin: 2px 0 6px;
+    transition: max-height 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .megamenu-item-open .megamenu-panel {
+    max-height: 1000px;
+  }
+
+  .megamenu-panel-inner,
+  .megamenu-panel-inner-2col {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .megamenu-panel,
+  .megamenu-chevron,
+  .megamenu-trigger,
+  .megamenu-plain-link,
+  .megamenu-link,
+  .megamenu-cta-button,
+  .megamenu-nav,
+  .megamenu-mobile-toggle span {
+    transition: none !important;
+  }
+}
