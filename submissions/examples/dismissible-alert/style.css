@@ -1,0 +1,282 @@
+/* =========================================================
+   Dismissible Alert
+   Color-coded alert (success, error, warning, info) that
+   slides out on dismiss. Namespace: .da- (Dismissible Alert)
+   Pure CSS animation, driven by the --da-duration custom
+   property. JS is only responsible for toggling the
+   .da-alert--dismissing class and removing the node after
+   the transition ends.
+   ========================================================= */
+
+:root {
+  --da-success-color: #1e7e34;
+  --da-success-bg:    #e6f6ea;
+  --da-success-border:#34a853;
+
+  --da-error-color:   #a11d2e;
+  --da-error-bg:      #fdecec;
+  --da-error-border:  #ea4335;
+
+  --da-warning-color: #8a6100;
+  --da-warning-bg:    #fff8e1;
+  --da-warning-border:#fbbc05;
+
+  --da-info-color:    #1a4f8b;
+  --da-info-bg:       #e8f0fe;
+  --da-info-border:   #4285f4;
+
+  --da-text-muted:    #5f6368;
+  --da-radius:        10px;
+  --da-duration:       350ms;   /* default slide-out speed, overridable per-alert */
+  --da-easing:         cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+
+/* ---------- Page shell (demo only, not part of the component) ---------- */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #fafafa;
+  color: #202124;
+}
+
+.da-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.da-page__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.da-page__title {
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+}
+
+.da-page__subtitle {
+  color: var(--da-text-muted);
+  line-height: 1.5;
+}
+
+.da-page__actions {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.da-reset-btn {
+  border: 1px solid #dadce0;
+  background: #fff;
+  color: #202124;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.da-reset-btn:hover {
+  background: #f1f3f4;
+}
+
+.da-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* =========================================================
+   Component: Alert
+   ========================================================= */
+
+.da-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--da-radius);
+  border: 1px solid transparent;
+  border-left-width: 4px;
+  background: #fff;
+  overflow: hidden;
+
+  /* Entrance state */
+  transform: translateX(0);
+  opacity: 1;
+  max-height: 200px;
+  margin-bottom: 0;
+
+  transition:
+    transform var(--da-duration) var(--da-easing),
+    opacity var(--da-duration) var(--da-easing),
+    max-height var(--da-duration) var(--da-easing),
+    padding var(--da-duration) var(--da-easing),
+    margin var(--da-duration) var(--da-easing);
+}
+
+/* Slide-out on dismiss: driven purely by CSS transition above,
+   triggered by JS adding this class. --da-duration controls speed. */
+.da-alert--dismissing {
+  transform: translateX(120%);
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: -14px;
+  pointer-events: none;
+}
+
+.da-alert__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.da-alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.da-alert__title {
+  margin: 0 0 2px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.da-alert__message {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--da-text-muted);
+}
+
+/* ---------- Close button ---------- */
+
+.da-alert__close {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.da-alert__close:hover,
+.da-alert__close:focus-visible {
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: rotate(90deg);
+  outline: none;
+}
+
+.da-alert__close-icon,
+.da-alert__close-icon::before,
+.da-alert__close-icon::after {
+  content: '';
+  position: absolute;
+}
+
+.da-alert__close-icon {
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+}
+
+.da-alert__close-icon::before,
+.da-alert__close-icon::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.da-alert__close-icon::before {
+  transform: rotate(45deg);
+}
+
+.da-alert__close-icon::after {
+  transform: rotate(-45deg);
+}
+
+/* =========================================================
+   Type modifiers — color coding
+   ========================================================= */
+
+.da-alert--success {
+  background: var(--da-success-bg);
+  border-color: var(--da-success-border);
+  color: var(--da-success-color);
+}
+.da-alert--success .da-alert__icon { background-color: var(--da-success-border); }
+.da-alert--success .da-alert__close { color: var(--da-success-color); }
+
+.da-alert--error {
+  background: var(--da-error-bg);
+  border-color: var(--da-error-border);
+  color: var(--da-error-color);
+}
+.da-alert--error .da-alert__icon { background-color: var(--da-error-border); }
+.da-alert--error .da-alert__close { color: var(--da-error-color); }
+
+.da-alert--warning {
+  background: var(--da-warning-bg);
+  border-color: var(--da-warning-border);
+  color: var(--da-warning-color);
+}
+.da-alert--warning .da-alert__icon { background-color: var(--da-warning-border); }
+.da-alert--warning .da-alert__close { color: var(--da-warning-color); }
+
+.da-alert--info {
+  background: var(--da-info-bg);
+  border-color: var(--da-info-border);
+  color: var(--da-info-color);
+}
+.da-alert--info .da-alert__icon { background-color: var(--da-info-border); }
+.da-alert--info .da-alert__close { color: var(--da-info-color); }
+
+/* =========================================================
+   Accessibility: respect reduced motion preference
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .da-alert {
+    transition-duration: 0.01ms !important;
+  }
+  .da-alert__close {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   Responsive tweaks
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .da-page__title {
+    font-size: 1.4rem;
+  }
+
+  .da-alert {
+    padding: 12px;
+  }
+
+  .da-alert__message {
+    font-size: 0.82rem;
+  }
+}

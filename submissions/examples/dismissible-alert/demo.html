@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dismissible Alert | EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="da-page">
+
+    <header class="da-page__header">
+      <h1 class="da-page__title">Dismissible Alert</h1>
+      <p class="da-page__subtitle">
+        Color-coded alerts (success, error, warning, info) that slide out
+        smoothly when dismissed. Animation is handled entirely in CSS via
+        the <code>--da-duration</code> custom property; JavaScript only
+        toggles a class and removes the element once the transition ends.
+      </p>
+    </header>
+
+    <section class="da-stack" id="da-stack">
+
+      <div class="da-alert da-alert--success" role="alert" style="--da-duration: 350ms;">
+        <span class="da-alert__icon" aria-hidden="true">✔</span>
+        <div class="da-alert__content">
+          <p class="da-alert__title">Success</p>
+          <p class="da-alert__message">Your changes have been saved successfully.</p>
+        </div>
+        <button class="da-alert__close" type="button" aria-label="Dismiss alert" onclick="dismissAlert(this)">
+          <span class="da-alert__close-icon"></span>
+        </button>
+      </div>
+
+      <div class="da-alert da-alert--error" role="alert" style="--da-duration: 350ms;">
+        <span class="da-alert__icon" aria-hidden="true">✕</span>
+        <div class="da-alert__content">
+          <p class="da-alert__title">Error</p>
+          <p class="da-alert__message">Something went wrong while processing your request.</p>
+        </div>
+        <button class="da-alert__close" type="button" aria-label="Dismiss alert" onclick="dismissAlert(this)">
+          <span class="da-alert__close-icon"></span>
+        </button>
+      </div>
+
+      <div class="da-alert da-alert--warning" role="alert" style="--da-duration: 350ms;">
+        <span class="da-alert__icon" aria-hidden="true">⚠</span>
+        <div class="da-alert__content">
+          <p class="da-alert__title">Warning</p>
+          <p class="da-alert__message">Your session will expire in 5 minutes.</p>
+        </div>
+        <button class="da-alert__close" type="button" aria-label="Dismiss alert" onclick="dismissAlert(this)">
+          <span class="da-alert__close-icon"></span>
+        </button>
+      </div>
+
+      <div class="da-alert da-alert--info" role="alert" style="--da-duration: 350ms;">
+        <span class="da-alert__icon" aria-hidden="true">ℹ</span>
+        <div class="da-alert__content">
+          <p class="da-alert__title">Info</p>
+          <p class="da-alert__message">A new version of the app is available.</p>
+        </div>
+        <button class="da-alert__close" type="button" aria-label="Dismiss alert" onclick="dismissAlert(this)">
+          <span class="da-alert__close-icon"></span>
+        </button>
+      </div>
+
+    </section>
+
+    <div class="da-page__actions">
+      <button class="da-reset-btn" type="button" onclick="location.reload()">Reset demo</button>
+    </div>
+
+  </main>
+
+  <script>
+    // JS only toggles a class and cleans up the DOM after the
+    // CSS-driven slide-out transition finishes. All animation
+    // (duration, easing, transform) lives in style.css.
+    function dismissAlert(button) {
+      var alertEl = button.closest('.da-alert');
+      if (!alertEl || alertEl.classList.contains('da-alert--dismissing')) return;
+
+      alertEl.classList.add('da-alert--dismissing');
+
+      var removed = false;
+      var remove = function () {
+        if (removed) return;
+        removed = true;
+        alertEl.remove();
+      };
+
+      alertEl.addEventListener('transitionend', remove, { once: true });
+      // Fallback in case transitionend doesn't fire (e.g. reduced motion)
+      var duration = parseFloat(getComputedStyle(alertEl).getPropertyValue('--da-duration')) || 350;
+      setTimeout(remove, duration + 100);
+    }
+  </script>
+
+</body>
+</html>
